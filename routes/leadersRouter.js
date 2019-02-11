@@ -2,15 +2,12 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const leaderRouter = express.Router();
+const mongoose = require('mongoose');
+const leaders  = require('./models/Leaders');
 
 leaderRouter.use(bodyParser.json());
 
 leaderRouter.route('/')
-.all((req,res,next) => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    next();
-})
 .get((req,res,next) => {
     res.end('Will send all the leader to you!');
 })
@@ -45,7 +42,5 @@ leaderRouter.route('/:leaderId')
 .delete( (req, res, next) => {
     res.end('Deleting leader: ' + req.params.leaderId);
 });
-
-
 
 module.exports = leaderRouter;

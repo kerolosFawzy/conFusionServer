@@ -43,7 +43,7 @@ app.use('/promotions', promoRouter);
 app.use('/leaders', leaderRouter);
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
+app.use(function (req, res, next) {8
     next(createError(404));
 });
 
