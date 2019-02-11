@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 
 const promotionsRouter = express.Router();
 const mongoose = require('mongoose');
-const promotions = require('./models/promotions');
+const promotions = require('../models/promotions');
 
 promotionsRouter.use(bodyParser.json());
 
@@ -12,7 +12,7 @@ promotionsRouter.route('/')
         promotions.find({}).then((promotions) => {
                 res.statusCode = 200;
                 res.setHeader('content_type', 'application/json');
-                res.jsonO(promotions);
+                res.json(promotions);
             }, (err) => next(err))
             .catch((err) => next(err));
     })
@@ -22,7 +22,7 @@ promotionsRouter.route('/')
                 console.log('promotion Created ', promotion);
                 res.statusCode = 200;
                 res.setHeader('content_type', 'application/json');
-                res.jsonO(promotion);
+                res.json(promotion);
             }, (err) => next(err))
             .catch((err) => next(err));
     })
