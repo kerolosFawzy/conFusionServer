@@ -12,7 +12,7 @@ var corsOptionsDelegate = (req, callback) => {
         }
     } else {
         corsOptions = {
-            origin: false
+             origin: false
         };
     }
     callback(null, corsOptions);
