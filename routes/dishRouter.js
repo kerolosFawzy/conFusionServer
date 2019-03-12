@@ -16,7 +16,7 @@ dishRouter.route('/')
     .get(cors.cors, (req, res, next) => {
         Dishes.find({})
             .populate('comments.author')
-            .then((dishes) => {
+            .exec((dishes) => {
                 res.statusCode = 200;
                 res.setHeader('Content-Type', 'application/json');
                 res.json(dishes);
@@ -112,7 +112,7 @@ dishRouter.route('/:dishId/comments')
         Dishes.findById(req.params.dishId)
             .then((dish) => {
                 if (dish != null) {
-                    req.body.author = req.user._id
+                    req.body.author = req.user._id;
                     dish.comments.push(req.body);
                     dish.save()
                         .then((dish) => {
@@ -139,7 +139,7 @@ dishRouter.route('/:dishId/comments')
     })
     .delete(cors.corsWithOptions, authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
         Dishes.findById(req.params.dishId)
-            .then((dish) => {
+            .then( (dish) => {
                 if (dish != null) {
                     for (var i = (dish.comments.length - 1); i >= 0; i--) {
                         dish.comments.id(dish.comments[i]._id).remove();
